@@ -144,6 +144,7 @@ export class CustomizationThemes extends React.Component<Props, State> {
 
 
     private handleChangeCurrentTheme = (index: number) => {
+        const { handleTriggerChartRebuild } = this.props;
         const rootElement = document.documentElement;
 
         if (rootElement) {
@@ -159,6 +160,7 @@ export class CustomizationThemes extends React.Component<Props, State> {
         }
 
         this.handleSetCurrentTheme(index);
+        handleTriggerChartRebuild && handleTriggerChartRebuild();
     };
 
     private handleSetCurrentTheme = (themeIndex: number) => {
