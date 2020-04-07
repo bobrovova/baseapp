@@ -42,9 +42,9 @@ export const colors = {
     },
     basic: {
         chart: {
-            primary: '#1E2841',
-            up: '#54B489',
-            down: '#E85E59',
+            primary: 'var(--rgb-body-background-color)',
+            up: 'var(--rgb-bids)',
+            down: 'var(--rgb-asks)',
         },
         navbar: {
             sun: 'var(--primary-text-color)',

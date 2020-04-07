@@ -17,6 +17,7 @@ export const handleConvertColorCode = (value: string, fromRGB?: boolean) => (
 interface OwnProps {
     translate: (key: string) => string;
     resetToDefault: boolean;
+    handleTriggerChartRebuild?: () => void;
     customization?: CustomizationDataInterface;
 }
 
@@ -108,7 +109,7 @@ export class CustomizationThemes extends React.Component<Props, State> {
     }
 
     public render() {
-        const { translate } = this.props;
+        const { handleTriggerChartRebuild, translate } = this.props;
         const { colorSettingsItem } = this.state;
 
         return (
@@ -119,6 +120,7 @@ export class CustomizationThemes extends React.Component<Props, State> {
                     handleCloseColorSettings={this.handleSetColorSettingsItem}
                     item={colorSettingsItem}
                     translate={translate}
+                    handleTriggerChartRebuild={handleTriggerChartRebuild}
                 />
             </div>
         );

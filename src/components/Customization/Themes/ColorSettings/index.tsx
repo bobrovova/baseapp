@@ -9,6 +9,7 @@ interface OwnProps {
     handleCloseColorSettings: () => void;
     item: ThemeColorTitleInterface;
     translate: (key: string) => string;
+    handleTriggerChartRebuild?: () => void;
 }
 
 interface State {
@@ -71,19 +72,20 @@ export class ColorSettings extends React.Component<Props, State> {
     };
 
     private setCurrentItemColor = color => {
-        const { item } = this.props;
+        const { handleTriggerChartRebuild, item } = this.props;
         const rootElement = document.documentElement;
-        const newItemColor = color && color.rgb && `${color.rgb.r}, ${color.rgb.g}, ${color.rgb.b}, ${color.rgb.a}`;
+        const newItemColor = color && color.rgb && `${color.rgb.r}, ${color.rgb.g}, ${color.rgb.b}`;
 
         if (rootElement && newItemColor) {
             this.handleSetCurrentItemColor(newItemColor);
             rootElement.style.setProperty(item.key, newItemColor);
+            handleTriggerChartRebuild && handleTriggerChartRebuild();
         }
     };
 
     private handleSetCurrentItemColor = (colorToSet?: string) => {
         if (colorToSet) {
-            this.setState({ currentItemColor: `rgba(${colorToSet})` });
+            this.setState({ currentItemColor: `rgb(${colorToSet})` });
         } else {
             this.setState({ currentItemColor: '' });
         }

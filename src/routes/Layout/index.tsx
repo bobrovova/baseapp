@@ -19,6 +19,7 @@ import {
     selectUserFetching,
     selectUserInfo,
     selectUserLoggedIn,
+    toggleChartRebuild,
     User,
     userFetch,
     walletsReset,
@@ -284,6 +285,8 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
 
                 return result;
             }, {});
+
+            this.props.toggleChartRebuild();
         }
     };
 }
@@ -301,6 +304,7 @@ const mapDispatchToProps: MapDispatchToProps<DispatchProps, {}> = dispatch => ({
     fetchConfigs: () => dispatch(configsFetch()),
     fetchCustomization: () => dispatch(customizationFetch()),
     logout: () => dispatch(logoutFetch()),
+    toggleChartRebuild: () => dispatch(toggleChartRebuild()),
     userFetch: () => dispatch(userFetch()),
     walletsReset: () => dispatch(walletsReset()),
 });

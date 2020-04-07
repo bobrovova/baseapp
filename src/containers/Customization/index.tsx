@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
-import { connect } from 'react-redux';
+import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import { RouteProps, withRouter } from 'react-router-dom';
 import { PaletteIcon } from '../../assets/images/customization/PaletteIcon';
 import {
@@ -17,6 +17,7 @@ import {
     selectCustomizationData,
     selectUserInfo,
     selectUserLoggedIn,
+    toggleChartRebuild,
     User,
 } from '../../modules';
 
@@ -26,11 +27,15 @@ interface ReduxProps {
     userLoggedIn: boolean;
 }
 
+interface DispatchProps {
+    toggleChartRebuild: typeof toggleChartRebuild;
+}
+
 interface HistoryProps {
     history: History;
 }
 
-type Props = ReduxProps & HistoryProps & RouteProps & InjectedIntlProps;
+type Props = ReduxProps & HistoryProps & RouteProps & DispatchProps & InjectedIntlProps;
 
 interface State {
     currentTabIndex: number;
@@ -56,6 +61,7 @@ class CustomizationContainer extends React.Component<Props, State> {
                         translate={this.translate}
                         customization={customization}
                         resetToDefault={resetToDefault}
+                        handleTriggerChartRebuild={this.handleTriggerChartRebuild}
                     />
                 ) : null,
                 label: this.translate('page.body.customization.tabs.themes'),
@@ -147,6 +153,10 @@ class CustomizationContainer extends React.Component<Props, State> {
         }));
     };
 
+    private handleTriggerChartRebuild = () => {
+        this.props.toggleChartRebuild();
+    };
+
     private translate = (key: string) => this.props.intl.formatMessage({id: key});
 }
 
@@ -156,5 +166,10 @@ const mapStateToProps = (state: RootState): ReduxProps => ({
     userLoggedIn: selectUserLoggedIn(state),
 });
 
+const mapDispatchProps: MapDispatchToPropsFunction<DispatchProps, {}> =
+    dispatch => ({
+        toggleChartRebuild: () => dispatch(toggleChartRebuild()),
+    });
+
 // tslint:disable no-any
-export const Customization = injectIntl(withRouter(connect(mapStateToProps)(CustomizationContainer) as any) as any);
+export const Customization = injectIntl(withRouter(connect(mapStateToProps, mapDispatchProps)(CustomizationContainer) as any) as any);
