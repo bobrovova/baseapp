@@ -1,5 +1,5 @@
 import { Button } from '@openware/components';
-import '@openware/cryptofont';
+import 'cryptofont';
 import classnames from 'classnames';
 import * as React from 'react';
 

@@ -1,4 +1,4 @@
-import { currencyCodes } from '@openware/cryptofont';
+import { currencyCodes } from 'cryptofont';
 
 const randomInteger = (min: number, max: number) =>
     Math.floor(Math.random() * (max - min) + min);

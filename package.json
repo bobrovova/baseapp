@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@openware/components": "2.3.0",
-    "@openware/cryptofont": "2.3.0",
+    "cryptofont": "git+https://github.com/openware/cryptofont.git",
     "@types/ws": "^6.0.4",
     "axios": "^0.18.0",
     "bitcoincashjs": "0.1.10",
